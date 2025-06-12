@@ -1,0 +1,410 @@
+rate: 5.0
+flight_duration: 72.0
+num_agents: 4
+log_data: True
+
+ 
+takeoff_target_height: 1.0
+takeoff_duration: 2.5
+hover_duration: 2.0
+land_duration: 2.5
+land_target_height: 0.02
+sleep_duration_before_shutdown: 4.0
+
+# Casadi Parameters
+nx: 2 # Number of states - \gamma and \dot{\gamma}
+nu: 1 # Number of control inputs - \ddot{\gamma}
+K: 20 # Prediction horizon
+T: 1000 # Simulation time
+h: 0.1 # Time step
+u_min: [-15.0] 
+u_max: [15.0]
+x_min: [0.0, 0.0]
+x_max_up: 2.0
+du: 1.0 # Distance between agents for smoothing function
+
+# Communcation term
+du11: 1.0 # *
+du12: 2.5
+
+# Collision Avoidance
+du21: 0.39 # *
+du22: 0.125
+du31: 0.25
+du32: 0.125
+
+# Pace keeping term
+dupc: 0.4 # *
+
+
+# Initial gammas
+gamma_init:
+- [0.0, 1.0] # 
+- [0.0, 1.0] # 3.33
+- [0.0, 1.0] # 6.66
+- [0.0, 1.0] # 10.0 
+- [0.0, 1.0]
+- [0.0, 1.0]
+- [0.0, 1.0]
+- [0.0, 1.0]
+- [0.0, 1.0]
+- [0.0, 1.0]
+
+# Circular trajectories
+radius: 
+- 0.4
+- 0.8
+- 1.2
+- 1.6
+- 2.5
+- 3.0
+- 3.5
+- 4.0
+- 4.5
+- 5.0
+
+
+
+circle_center_coordiantes:
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+
+init_angle: 
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+
+
+
+angular_velocity:
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+
+rotation_direction: # CW = 1, CCW = -1
+- 1
+- 1
+- 1
+- 1
+- 1
+- 1
+- 1
+- 1
+- 1
+- 1
+
+
+
+# Trajectories with phaseshift - Yin-Yang
+radius_1: 
+- 1.0
+- 0.5
+- 0.5
+- 1.0
+- 0.5
+- 0.5
+- 1.0
+
+circle_center_coordiantes_1:
+- [0.0, 0.0, 1.0]
+- [0.5, 0.0, 1.0]
+- [-0.5, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.5, 0.0, 1.0]
+- [-0.5, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+
+
+init_angle_1: 
+- -1.570795
+- 0.0
+- 0.0
+- 3.14159
+- 0.0
+- 0.0
+- 3.14159
+
+angular_velocity_1:
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+
+rotation_direction_1: # CW = 1, CCW = -1
+- 1
+- 1
+- -1
+- 1
+- 1
+- -1
+- 1
+
+# End time for each trajectory in sequence
+duration_1:
+- 5
+- 15
+- 25
+- 35
+- 45
+- 55
+- 65
+
+
+# Trajectories with phaseshift - Yin-Yang
+radius_2: 
+- 1.0
+- 0.5
+- 0.5
+- 1.0
+- 0.5
+- 0.5
+- 1.0
+
+circle_center_coordiantes_2:
+- [0.0, 0.0, 1.0]
+- [0.5, 0.0, 1.0]
+- [-0.5, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.5, 0.0, 1.0]
+- [-0.5, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+
+
+init_angle_2: 
+- 1.570795
+- 0.0
+- 0.0
+- 3.14159
+- 0.0
+- 0.0
+- 3.14159
+
+angular_velocity_2:
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+
+rotation_direction_2: # CW = 1, CCW = -1
+- -1
+- 1
+- -1
+- -1
+- 1
+- -1
+- -1
+
+# End time for each trajectory in sequence
+duration_2:
+- 5
+- 15
+- 25
+- 35
+- 45
+- 55
+- 65
+
+
+# Trajectories with phaseshift - Overlapping Circles
+radius_21: 
+- 0.7
+- 0.5
+- 0.7
+- 0.5
+- 0.7
+
+circle_center_coordiantes_21:
+- [-0.2, 0.0 , 1.0]
+- [0.0, 0.0, 1.0]
+- [-0.2, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [-0.2, 0.0, 1.0]
+
+
+init_angle_21: 
+- 1.570795
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+
+angular_velocity_21:
+- 0.1570796
+- 0.3141592
+- 0.1570796
+- 0.3141592
+- 0.1570796
+
+rotation_direction_21: # CW = 1, CCW = -1
+- 1
+- 1
+- 1
+- 1
+- 1
+
+# End time for each trajectory in sequence
+duration_21:
+- 30.0
+- 50.0
+- 90.0
+- 110.0
+
+radius_22: 
+- 0.9
+- 0.5
+- 0.9
+- 0.5
+- 0.9
+
+circle_center_coordiantes_22:
+- [-0.4, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [-0.4, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [-0.4, 0.0, 1.0]
+
+
+init_angle_22: 
+- 1.570795
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+
+angular_velocity_22:
+- 0.1570796
+- 0.3141592
+- 0.1570796
+- 0.3141592
+- 0.1570796
+
+rotation_direction_22: # CW = 1, CCW = -1
+- 1
+- 1
+- 1
+- 1
+- 1
+
+# End time for each trajectory in sequence
+duration_22:
+- 30.0
+- 50.0
+- 90.0
+- 110.0
+
+radius_23: 
+- 1.1
+- 0.5
+- 1.1
+- 0.5
+- 1.1
+
+circle_center_coordiantes_23:
+- [-0.6, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [-0.6, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [-0.6, 0.0, 1.0]
+
+
+init_angle_23: 
+- 1.570795
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+
+
+angular_velocity_23:
+- 0.1570796
+- 0.3141592
+- 0.1570796
+- 0.3141592
+- 0.1570796
+
+rotation_direction_23: # CW = 1, CCW = -1
+- 1
+- 1
+- 1
+- 1
+- 1
+
+# End time for each trajectory in sequence
+duration_23:
+- 30.0
+- 50.0
+- 90.0
+- 110.0
+
+radius_24: 
+- 1.3
+- 0.5
+- 1.3
+- 0.5
+- 1.3
+
+circle_center_coordiantes_24:
+- [-0.8, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [-0.8, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [-0.8, 0.0, 1.0]
+
+
+init_angle_24: 
+- 1.570795
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+
+
+angular_velocity_24:
+- 0.1570796
+- 0.3141592
+- 0.1570796
+- 0.3141592
+- 0.1570796
+
+rotation_direction_24: # CW = 1, CCW = -1
+- 1
+- 1
+- 1
+- 1
+- 1
+
+# End time for each trajectory in sequence
+duration_24:
+- 30.0
+- 50.0
+- 90.0
+- 110.0

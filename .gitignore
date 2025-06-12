@@ -11,3 +11,7 @@ firm
 client
 launch # ignore launch symlink
 !*ros_ws/*launch* # don't ignore folders with launch in the name
+ros_ws/src/crazyflie-firmware/src/modules/src/collision_avoidance.o
+ros_ws/src/crazyflie-firmware/src/modules/src/planner.o
+ros_ws/src/crazyflie-firmware/src/modules/src/pptraj_compressed.o
+ros_ws/src/crazyflie-firmware/src/modules/src/pptraj.o

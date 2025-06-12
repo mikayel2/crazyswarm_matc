@@ -1,0 +1,102 @@
+rate: 10.0
+flight_duration: 50.0
+number_of_drones: 5
+log_data: True
+
+ 
+takeoff_target_height: 1.0
+takeoff_duration: 1.0
+hover_duration: 5.0
+land_duration: 2.5
+land_target_height: 0.02
+sleep_duration_before_shutdown: 4.0
+
+a: 1.5
+b: 3.6
+delta: 3.0
+step: 0.02
+d_min: 2.0  
+d_min_2: 1.8
+
+# Time coordination parameters
+# IMPORTANT: The number of elements in the following lists should be equal to the number of drones
+gamma_init: [0.0, 5.0, 10.0 , 15.0, 20.0] # [1 x N]
+gamma_dot_init: [0.0, 0.0, 0.0, 0.0, 0.0] # [1 x N]
+l_init: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # [1 x (N^2-N)/2]
+b_LSQ: [1.0, 1.0, 1.0, 1.0] # [1 x N-1]
+
+
+# Optimal control problem parameters
+# [gamma, gamma_dot, gamma_2, gamma_3, l_12, l_13, l_23, a_1, a_2, G_11, G_12, G_13, error]
+# x0: [0.0, 0.0, 0.0, 0.0, 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Tf: 2.0 # prediction horizon
+N_horizon: 20 # number of control intervals
+Fmax: 25 # used only for plotting the results
+compile: True
+
+
+# Circular trajectories
+radius: 
+- 0.5
+- 1.0
+- 1.5
+- 2.0
+- 2.5
+- 3.0
+- 3.5
+- 4.0
+- 4.5
+- 5.0
+
+
+
+circle_center_coordiantes:
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+- [0.0, 0.0, 1.0]
+
+init_angle: 
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+
+
+
+angular_velocity:
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+- 0.314159
+
+rotation_direction: # CW = 1, CCW = -1
+- 1
+- 1
+- 1
+- 1
+- 1
+- 1
+- 1
+- 1
+- 1
+- 1
