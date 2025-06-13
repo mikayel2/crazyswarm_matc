@@ -18,6 +18,7 @@ import casadi as ca # Importing CasADi for optimization and MPC
 from casadi_ocp.MPC import MPC
 from trajectories.circular_traj_cas import cir_traj
 from trajectories.circular_traj_cas2 import cir_traj_2
+from trajectories.wave_traj_cas import build_parallel_waves
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.animation import FuncAnimation
@@ -103,11 +104,14 @@ def executeTrajectory(swarm, timeHelper):
     #                cir_traj_2(config.circle_center_coordiantes[3],config.radius[3],config.angular_velocity[3] ,config.init_angle[3], config.rotation_direction[3])
     #                ]
 
-    trajectories = [  cir_traj_2(config.circle_center_coordiantes[0],config.radius[0],config.angular_velocity[0] ,config.init_angle[0], config.rotation_direction[0]),
-                   cir_traj_2(config.circle_center_coordiantes[1],config.radius[1],config.angular_velocity[1] ,config.init_angle[1], config.rotation_direction[1]),        
-                   cir_traj_2(config.circle_center_coordiantes[2],config.radius[2],config.angular_velocity[2] ,config.init_angle[2], config.rotation_direction[2]),
-                   cir_traj_2(config.circle_center_coordiantes[3],config.radius[3],config.angular_velocity[3] ,config.init_angle[3], config.rotation_direction[3])
-                   ]
+    trajectories = build_parallel_waves(
+        n_curves      = config.num_agents,   # 4, 8, etc.
+        spacing       = 4.0,                 # lane gap (m)
+        amplitude     = 2.0,                 # peak height
+        wavelength    = 12.0,                # peak-to-peak distance
+        forward_speed = 1.5,                 # m s-1 along +x
+        z0            = 1.0                  # hover altitude
+        )
     #seq_traj(config)
     # Create circular trajectories for each drone
     #trajectories = []
