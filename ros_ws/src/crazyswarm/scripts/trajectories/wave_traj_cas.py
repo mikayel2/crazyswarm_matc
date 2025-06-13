@@ -22,9 +22,9 @@ class WaveTrajCas:
 
     def __init__(self, *,
                  y_offset      = 0.0,
-                 amplitude     = 2.0,
-                 wavelength    = 12.0,
-                 forward_speed = 1.5,
+                 amplitude     = 0.5,
+                 wavelength    = 4.0,
+                 forward_speed = 1.0,
                  z0            = 1.0):
 
         self.A   = amplitude
@@ -88,7 +88,7 @@ class WaveTrajCas:
 
 
 # -----------------------------------------------------------------
-def build_parallel_waves(n_curves=8, spacing=4.0, **wave_kw):
+def build_parallel_waves(n_curves=8, spacing=1.0, **wave_kw):
     """Return a list of WaveTrajCas objects, each with a y-offset."""
     offsets = spacing * (np.arange(n_curves) - (n_curves-1)/2)
     return [WaveTrajCas(y_offset=o, **wave_kw) for o in offsets]
