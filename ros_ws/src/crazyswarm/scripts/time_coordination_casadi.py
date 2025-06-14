@@ -18,7 +18,8 @@ import casadi as ca # Importing CasADi for optimization and MPC
 from casadi_ocp.MPC import MPC
 from trajectories.circular_traj_cas import cir_traj
 from trajectories.circular_traj_cas2 import cir_traj_2
-from trajectories.wave_traj_cas import build_parallel_waves
+#from trajectories.wave_traj_cas import build_parallel_waves
+from trajectories.bspline_traj_cas import BsplineTrajCas
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.animation import FuncAnimation
@@ -104,14 +105,24 @@ def executeTrajectory(swarm, timeHelper):
     #                cir_traj_2(config.circle_center_coordiantes[3],config.radius[3],config.angular_velocity[3] ,config.init_angle[3], config.rotation_direction[3])
     #                ]
 
-    trajectories = build_parallel_waves(
-        n_curves      = config.num_agents,   # 4, 8, etc.
-        spacing       = 4.0,                 # lane gap (m)
-        amplitude     = 2.0,                 # peak height
-        wavelength    = 12.0,                # peak-to-peak distance
-        forward_speed = 1.5,                 # m s-1 along +x
-        z0            = 1.0                  # hover altitude
-        )
+    # ---------- CHOOSE CSV-BASED LANES ------------------------------
+    CSV_DIR   = "csv"          # folder that contains lane_0.csv … lane_7.csv
+    DURATION  = 20.0           # seconds to traverse the 3-m Y-range
+    
+    trajectories = [
+        BsplineTrajCas(f"{CSV_DIR}/lane_{i}.csv", DURATION)
+        for i in range(config.num_agents)
+    ]
+    # ---------------------------------------------------------------
+
+    # trajectories = build_parallel_waves(
+    #     n_curves      = config.num_agents,   # 4, 8, etc.
+    #     spacing       = 4.0,                 # lane gap (m)
+    #     amplitude     = 2.0,                 # peak height
+    #     wavelength    = 12.0,                # peak-to-peak distance
+    #     forward_speed = 1.5,                 # m s-1 along +x
+    #     z0            = 1.0                  # hover altitude
+    #     )
     #seq_traj(config)
     # Create circular trajectories for each drone
     #trajectories = []
