@@ -19,6 +19,7 @@ from casadi_ocp.MPC import MPC
 from trajectories.circular_traj_cas import cir_traj
 from trajectories.circular_traj_cas2 import cir_traj_2
 #from trajectories.wave_traj_cas import build_parallel_waves
+from pathlib import Path
 from trajectories.bspline_traj_cas import BsplineTrajCas
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -106,11 +107,11 @@ def executeTrajectory(swarm, timeHelper):
     #                ]
 
     # ---------- CHOOSE CSV-BASED LANES ------------------------------
-    CSV_DIR   = "csv"          # folder that contains lane_0.csv … lane_7.csv
-    DURATION  = 20.0           # seconds to traverse the 3-m Y-range
+    CSV_DIR  = Path(__file__).resolve().parent / "CSV"   # points to script/CSV
+    DURATION = 20.0                                      # seconds for full path
     
     trajectories = [
-        BsplineTrajCas(f"{CSV_DIR}/lane_{i}.csv", DURATION)
+        BsplineTrajCas(str(CSV_DIR / f"lane_{i}.csv"), DURATION)
         for i in range(config.num_agents)
     ]
     # ---------------------------------------------------------------
